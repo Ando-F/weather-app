@@ -23,27 +23,37 @@ document.getElementById('search-form').addEventListener('click', (e) => {
 	e.preventDefault();
 });
 
+function getDayName(number) {
+	let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	let today = new Date();
+	return days[today.getDay() + number];
+}
+
 //creating object for the start page
 async function mainFunction(city) {
 	//working with data from the first API. Getting some basic info and coordinates of the types city
 	//in order to use another API call.
 	const cityData = await getWeather(city);
+	console.log(cityData);
 	const weatherObj = {
 		city: cityData.name,
-		temp: cityData.main.temp,
-		feels_like: cityData.main.feels_like,
-		temp_max: cityData.main.temp_max,
-		temp_min: cityData.main.temp_min,
+		temp: Math.round(cityData.main.temp),
+		feels_like: Math.round(cityData.main.feels_like),
+		temp_max: Math.round(cityData.main.temp_max),
+		temp_min: Math.round(cityData.main.temp_min),
 		clouds: cityData.clouds.all,
 		wind: cityData.wind.speed,
 		humidity: cityData.main.humidity,
 		lon: cityData.coord.lon,
 		lat: cityData.coord.lat
-	}
+	};
 
 	//creating another object from second API data to get daily forecast
 	const openCallData = await oneCallAPI(weatherObj.lon, weatherObj.lat);
 	console.log(openCallData);
+	const openCallObj = {
+
+	};
 
 	//populating the page
 	createPage(weatherObj);
@@ -82,4 +92,11 @@ function createPage(object) {
 
 	const windSpeed = document.getElementById("wind-speed");
 	windSpeed.innerHTML = "Wind speed: <br>" + object.wind + ' m/s';
+
+	//daily block
+	const tomorrow = document.getElementById('tomorrow');
+	tomorrow.innerHTML = getDayName(0);
+
+	const dayAfter1 = document.getElementById('day-after-1');
+	dayAfter1.innerHTML = getDayName(1);
 }

@@ -1,0 +1,81 @@
+html, body {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("images/pexels-brian-lazo-9404648.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: aliceblue;
+}
+
+#app-name {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#weather {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*elements inside main data div*/
+#city-name {
+    margin-left: 5px;
+}
+
+#current-temp {
+    margin-left: 5px;
+}
+
+#current-temp {
+    font-size: larger;
+}
+
+#main-data {
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+}
+
+#div-both-temp {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.div-temp {
+    display: flex;
+    align-items: center;
+}
+
+.main-img {
+    width: 25px;
+    height: 25px;
+}
+
+/*elements inside sub data div*/
+.side-data {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5%;
+}
+
+.side-img {
+    width: 50px;
+    height: 50px;
+}
+
+.side-p {
+    width: 84px;
+}
+
+#sub-data {
+    margin-right: 5%;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>weather app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="app-name">
+        <h1 id="name">Weather App</h1>
+    </header>
+    <form id="search-form">
+        <input id="input-bar">
+        <button id="search-button">Search</button>
+    </form>
+    <div id="weather">
+        <div id="main-data">
+            <h2 id="city-name"></h2>
+            <p id="current-temp"></p>
+            <div id="div-both-temp">
+                <div class="div-temp">
+                    <img src="images/arrow-up.png" class="main-img">
+                    <p id="max-temp"></p>
+                </div>
+                <div class="div-temp">
+                    <img src="images/arrow-down.png" class="main-img">
+                    <p id="min-temp"></p>
+                </div>
+            </div>
+        </div>
+        <div id="sub-data">
+            <div class="side-data">
+                <img src="images/weather.png" class="side-img">
+                <p id="feels-like" class="side-p"></p>
+            </div>
+            <div class="side-data">
+                <img src="images/humidity.png" class="side-img">
+                <p id="humidity" class="side-p"></p>
+            </div>
+            <div class="side-data">
+                <img src="images/wind.png" class="side-img">
+                <p id="wind-speed" class="side-p"></p>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

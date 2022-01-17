@@ -8,6 +8,16 @@ async function getWeather(city) {
 	}
 }
 
+//second API call, using data from the first one
+async function oneCallAPI(lon, lat) {
+	try {
+		const response = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=metric&appid=fcad1320eb0e956061faac7fb0397e89')
+		return await response.json();
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 //preventing page reload
 document.getElementById('search-form').addEventListener('click', (e) => {
 	e.preventDefault();
@@ -15,21 +25,27 @@ document.getElementById('search-form').addEventListener('click', (e) => {
 
 //creating object for the start page
 async function mainFunction(city) {
-	const startCityData = await getWeather(city);
-	console.log(startCityData);
-
+	//working with data from the first API. Getting some basic info and coordinates of the types city
+	//in order to use another API call.
+	const cityData = await getWeather(city);
 	const weatherObj = {
-		city: startCityData.name,
-		temp: startCityData.main.temp,
-		feels_like: startCityData.main.feels_like,
-		temp_max: startCityData.main.temp_max,
-		temp_min: startCityData.main.temp_min,
-		clouds: startCityData.clouds.all,
-		wind: startCityData.wind.speed,
-		humidity: startCityData.main.humidity
+		city: cityData.name,
+		temp: cityData.main.temp,
+		feels_like: cityData.main.feels_like,
+		temp_max: cityData.main.temp_max,
+		temp_min: cityData.main.temp_min,
+		clouds: cityData.clouds.all,
+		wind: cityData.wind.speed,
+		humidity: cityData.main.humidity,
+		lon: cityData.coord.lon,
+		lat: cityData.coord.lat
 	}
-	console.log(weatherObj);
 
+	//creating another object from second API data to get daily forecast
+	const openCallData = await oneCallAPI(weatherObj.lon, weatherObj.lat);
+	console.log(openCallData);
+
+	//populating the page
 	createPage(weatherObj);
 }
 

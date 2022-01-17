@@ -79,3 +79,10 @@ body {
 #sub-data {
     margin-right: 5%;
 }
+
+/*daily data*/
+#daily-data {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}

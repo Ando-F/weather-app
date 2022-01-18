@@ -26,7 +26,12 @@ document.getElementById('search-form').addEventListener('click', (e) => {
 function getDayName(number) {
 	let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	let today = new Date();
-	return days[today.getDay() + number];
+	let dayNum = today.getDay() + number;
+	if (dayNum <= 6) {
+		return days[dayNum];
+	} else {
+		return days[dayNum - 7];
+	}
 }
 
 //creating object for the start page
@@ -52,11 +57,43 @@ async function mainFunction(city) {
 	const openCallData = await oneCallAPI(weatherObj.lon, weatherObj.lat);
 	console.log(openCallData);
 	const openCallObj = {
-
+		one: {
+			dayTemp: openCallData.daily[1].temp.day,
+			nightTemp: openCallData.daily[1].temp.night
+		},
+		two: {
+			dayTemp: openCallData.daily[2].temp.day,
+			nightTemp: openCallData.daily[2].temp.night
+		},
+		three: {
+			dayTemp: openCallData.daily[3].temp.day,
+			nightTemp: openCallData.daily[3].temp.night
+		},
+		four: {
+			dayTemp: openCallData.daily[3].temp.day,
+			nightTemp: openCallData.daily[3].temp.night
+		},
+		five: {
+			dayTemp: openCallData.daily[4].temp.day,
+			nightTemp: openCallData.daily[4].temp.night
+		},
+		six: {
+			dayTemp: openCallData.daily[5].temp.day,
+			nightTemp: openCallData.daily[5].temp.night
+		},
+		seven: {
+			dayTemp: openCallData.daily[6].temp.day,
+			nightTemp: openCallData.daily[6].temp.night
+		},
+		eight: {
+			dayTemp: openCallData.daily[7].temp.day,
+			nightTemp: openCallData.daily[7].temp.night
+		}
 	};
+	console.log(openCallObj);
 
 	//populating the page
-	createPage(weatherObj);
+	createPage(weatherObj, openCallObj);
 }
 
 mainFunction('New York');
@@ -69,7 +106,7 @@ searchButton.addEventListener('click', () => {
 })
 
 //populate the page with data from weather object
-function createPage(object) {
+function createPage(object, openCallObj) {
 	//main block
 	const cityName = document.getElementById("city-name");
 	cityName.innerHTML = object.city;
@@ -96,7 +133,24 @@ function createPage(object) {
 	//daily block
 	const tomorrow = document.getElementById('tomorrow');
 	tomorrow.innerHTML = getDayName(0);
+	const tomTemp = document.getElementById('tom-temp');
+	tomTemp.innerHTML = openCallObj.one.dayTemp;
 
 	const dayAfter1 = document.getElementById('day-after-1');
 	dayAfter1.innerHTML = getDayName(1);
+
+	const dayAfter2 = document.getElementById('day-after-2');
+	dayAfter2.innerHTML = getDayName(2);
+
+	const dayAfter3 = document.getElementById('day-after-3');
+	dayAfter3.innerHTML = getDayName(3);
+
+	const dayAfter4 = document.getElementById('day-after-4');
+	dayAfter4.innerHTML = getDayName(4);
+
+	const dayAfter5 = document.getElementById('day-after-5');
+	dayAfter5.innerHTML = getDayName(5);
+
+	const dayAfter6 = document.getElementById('day-after-6');
+	dayAfter6.innerHTML = getDayName(6);
 }
